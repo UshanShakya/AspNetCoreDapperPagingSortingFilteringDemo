@@ -1,0 +1,47 @@
+﻿@using System.Collections.Specialized
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1>Products</h1>
+    <br />
+
+    <table id="products" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Color</th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#products').DataTable({
+                processing: true,
+                serverSide: true,
+                searching: true,
+                ordering: true,
+                paging: true,
+                "ajax": {
+                    "url": "api/Products",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                columns: [
+                    { "data": "productID", "name": "Product Id", "autoWidth": true },
+                    { "data": "name", "name": "Product Name", "autoWidth": true },
+                    { "data": "productNumber", "name": "Product Number", "autoWidth": true },
+                    { "data": "color", "name": "Product Color", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+}
